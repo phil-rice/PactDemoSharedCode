@@ -8,9 +8,11 @@ import com.twitter.finatra.request.{QueryParam, RouteParam}
 
 /** Admin port is at port +1 */
 class FinatraServer(port: Int, controllers: Controller*) extends HttpServer {
+
   override val modules = Seq()
 
-  override def defaultHttpPort: Int = port + 1
+  override val disableAdminHttpServer = true // see https://twitter.github.io/finatra/user-guide/twitter-server/index.html
+  override def defaultHttpPort: Int = port
 
   override val defaultFinatraHttpPort: String = s":$port"
 
