@@ -8,7 +8,7 @@ object Heroku {
   }
 
   def provider = Option(System.getenv("PORT")) match {
-    case Some(p) => "pact-demo-provider.herokuapp.com"// we are in the heroku world
+    case Some(p) => "pact-demo-provider.herokuapp.com:80"// we are in the heroku world
     case _ => "localhost:9000"
   }
 }
