@@ -4,6 +4,6 @@ object Heroku {
 
   def port(default: Int): Int = Option(System.getenv("PORT")) match {
     case Some(p) => p.toInt
-    case + => default
+    case _ => default
   }
 }
