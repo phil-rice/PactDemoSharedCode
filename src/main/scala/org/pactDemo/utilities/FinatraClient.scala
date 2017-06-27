@@ -13,11 +13,6 @@ class FinatraClient(hostAndPort: String, fn: String => String) extends Service[I
   val service = Http.newService(hostAndPort)
 
   override def apply(id: Int): Future[String] =
-    service(Request(s"/id/$id")).map(res => fn(res.contentString)).
-      respond { tryT =>
-        info(s"FinatraClient $hostAndPort with $id resulted in $tryT")
-        println(s"FinatraClient $hostAndPort with $id resulted in $tryT")
-        tryT }
-
+    service(Request(s"/id/$id")).map(res => fn(res.contentString))
 
 }
