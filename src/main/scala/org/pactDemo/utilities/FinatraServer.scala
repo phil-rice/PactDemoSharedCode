@@ -20,10 +20,7 @@ class FinatraServer(defaultPort: Int, controllers: Controller*) extends HttpServ
 
 
   override def configureHttp(router: HttpRouter): Unit = {
-    val raw = router
-      .filter[LoggingMDCFilter[Request, Response]]
-      .filter[TraceIdMDCFilter[Request, Response]]
-      .filter[CommonFilters]
+    val raw = router.filter[CommonFilters]
     controllers.foldLeft(raw)((acc, c) => acc.add(c))
   }
 }
