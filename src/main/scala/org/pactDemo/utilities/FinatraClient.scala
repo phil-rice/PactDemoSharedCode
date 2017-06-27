@@ -5,9 +5,9 @@ import com.twitter.finagle.{Http, Service}
 import com.twitter.util.Future
 
 
-class FinatraClient(host: String, port: Int, fn: String => String) extends Service[Int, String] {
+class FinatraClient(hostAndPort: String, fn: String => String) extends Service[Int, String] {
 
-  val service = Http.newService(s"$host:$port")
+  val service = Http.newService(hostAndPort)
 
   override def apply(id: Int): Future[String] =
     service(Request(s"/id/$id")).map(res => fn(res.contentString))
